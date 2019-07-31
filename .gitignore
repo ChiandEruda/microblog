@@ -123,6 +123,10 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# self
+migrations
+config.py
+
 # Windows:
 Thumbs.db
 ehthumbs.db
