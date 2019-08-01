@@ -126,6 +126,9 @@ dmypy.json
 # self
 migrations
 config.py
+microblog.log
+log
+app.db
 
 # Windows:
 Thumbs.db
