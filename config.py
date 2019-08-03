@@ -9,4 +9,20 @@ class Config(object):
                 'sqlite:///' + os.path.join(basedir, 'app.db')
     # SQLALCHEMY_TRACK_MODIFICATIONS 配置项用于设置数据发生变更之后是否发送信号给应用
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    # 邮件配置
+    MAIL_SERVER = os.environ.get('MAIL_SERVER')
+    MAIL_PORT = int(os.environ.get('MAIL_PORT') or 25)
+    MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+    # 直接配置，测试时才用
+    # MAIL_SERVER = 'smtp.googlemail.com'
+    # MAIL_PORT = 587
+    # MAIL_USE_TLS = 1
+    # MAIL_USERNAME = 'example@mail.com'
+    # MAIL_PASSWORD = 'xxxx'
+    ADMINS = ['g549141930@gmail.com']
+    
     POSTS_PER_PAGE = 25
+
