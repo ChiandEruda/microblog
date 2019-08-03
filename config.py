@@ -9,3 +9,4 @@ class Config(object):
                 'sqlite:///' + os.path.join(basedir, 'app.db')
     # SQLALCHEMY_TRACK_MODIFICATIONS 配置项用于设置数据发生变更之后是否发送信号给应用
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    POSTS_PER_PAGE = 25
