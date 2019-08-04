@@ -8,6 +8,7 @@ import os
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
+from flask_babel import Babel
 
 from config import Config
 
@@ -19,10 +20,11 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'login'
+login.login_message = '请从本页面登录。'
 mail = Mail(app)
 bootstrap = Bootstrap(app)
 moment = Moment(app)
-
+babel = Babel(app)
 
 if not app.debug:
     # ...
