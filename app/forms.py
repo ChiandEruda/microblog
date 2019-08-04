@@ -13,18 +13,18 @@ from wtforms.validators import Length
 from app.models import User
 
 class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    remember_me = BooleanField('Remember Me')
-    submit = SubmitField('Sign In')
+    username = StringField('用户名称', validators=[DataRequired(message='用户名称不能为空')])
+    password = PasswordField('用户密码', validators=[DataRequired(message='用户密码不能为空')])
+    remember_me = BooleanField('记住我')
+    submit = SubmitField('登陆')
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
+    username = StringField('用户名称', validators=[DataRequired(message='用户信息不能为空')])
+    email = StringField('注册邮箱', validators=[DataRequired(message='注册邮箱不能为空'), Email()])
+    password = PasswordField('用户密码', validators=[DataRequired(message='用户密码不能为空')])
     password2 = PasswordField(
-        'Repeat Password', validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Register')
+        '确认密码', validators=[DataRequired(message='确认密码不能为空'), EqualTo('password')])
+    submit = SubmitField('注册')
 
     # 当添加任何匹配模式 validate_ <field_name> 的方法时
     # WTForms 将这些方法作为自定义验证器
@@ -54,19 +54,19 @@ class EditProfileForm(FlaskForm):
         if username.data != self.original_username:
             user = User.query.filter_by(username=self.username.data).first()
             if user is not None:
-                raise ValidationError('Please use a different username.')
+                raise ValidationError('此用户名无法使用.')
 
 class PostForm(FlaskForm):
-    post = TextAreaField('Say something', validators=[
+    post = TextAreaField('说点什么', validators=[
         DataRequired(), Length(min=1, max=140)])
-    submit = SubmitField('Submit')
+    submit = SubmitField('发布')
 
 class ResetPasswordRequestForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    submit = SubmitField('Request Password Reset')
+    email = StringField('Email', validators=[DataRequired(message='邮箱不能为空'), Email()])
+    submit = SubmitField('发起重置')
 
 class ResetPasswordForm(FlaskForm):
-    password = PasswordField('Password', validators=[DataRequired()])
+    password = PasswordField('重置密码', validators=[DataRequired(message='重置密码不能为空')])
     password2 = PasswordField(
-        'Repeat Password', validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Request Password Reset')
+        '确认密码', validators=[DataRequired(message='确认密码不能为空'), EqualTo('password')])
+    submit = SubmitField('确定重置')

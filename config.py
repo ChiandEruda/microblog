@@ -24,5 +24,5 @@ class Config(object):
     # MAIL_PASSWORD = 'xxxx'
     ADMINS = ['g549141930@gmail.com']
     
-    POSTS_PER_PAGE = 25
+    POSTS_PER_PAGE = 5
 
