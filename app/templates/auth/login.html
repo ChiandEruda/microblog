@@ -9,10 +9,10 @@
                 {% if form %}
                 {{ wtf.quick_form(form) }}
                 {% endif %}
-                <p>新用户？<a href="{{ url_for('register') }}">点击注册</a></p>
+                <p>新用户？<a href="{{ url_for('auth.register') }}">点击注册</a></p>
                 <p>
                     忘记密码？
-                    <a href="{{ url_for('reset_password_request') }}">点击重置</a>
+                    <a href="{{ url_for('auth.reset_password_request') }}">点击重置</a>
                 </p>
             </div>
         </div>
