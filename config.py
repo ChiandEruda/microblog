@@ -25,7 +25,7 @@ class Config(object):
     # MAIL_USE_TLS = 1
     # MAIL_USERNAME = 'example@mail.com'
     # MAIL_PASSWORD = 'xxxx'
-    ADMINS = ['g549141930@gmail.com']
+    ADMINS = ['example@mail.com']
     
     POSTS_PER_PAGE = 5
 
