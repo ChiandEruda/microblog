@@ -105,6 +105,8 @@ class User(UserMixin, db.Model):
         return '<User {}>'.format(self.username)
 
 class Post(db.Model):
+    __searchable__ = ['body']
+    
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
     # 添加了一个 default 参数，并传入了 datetime.utcnow 函数 

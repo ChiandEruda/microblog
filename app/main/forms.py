@@ -26,3 +26,7 @@ class PostForm(FlaskForm):
     post = TextAreaField('说点什么', validators=[
         DataRequired(), Length(min=1, max=140)])
     submit = SubmitField('发布')
+
+class SearchForm(FlaskForm):
+    keyword = StringField('')
+    sumit = SubmitField('搜索')

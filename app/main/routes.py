@@ -2,18 +2,21 @@ from datetime import datetime
 from flask import render_template, flash, redirect, url_for, request, g, \
     jsonify, current_app
 from flask_login import current_user, login_required
+from flask import g
+from flask import request
 
 from app import db
 from app.main.forms import EditProfileForm, PostForm
 from app.models import User, Post
 from app.main import bp
-
+from app.main.forms import SearchForm
 
 @bp.before_app_request
 def before_request():
     if current_user.is_authenticated:
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
+        g.search_form = SearchForm()
 
 
 @bp.route('/', methods=['GET', 'POST'])
@@ -116,4 +119,18 @@ def unfollow(username):
     db.session.commit()
     flash('取消关注 {}'.format(username))
     return redirect(url_for('main.user', username=username))
+
+
+@bp.route('/search')
+def search():
+    keyword = request.args.get('keyword')
+    if keyword:
+        results = Post.query.msearch(keyword, fields=['body'], limit=20).all()
+        return render_template('search.html', title='搜索结果', results=results)
+    return redirect(url_for('main.index'))
+
+
+
+
+
 

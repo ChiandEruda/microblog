@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block app_content %}
+    {% for post in results %}
+        {% include '_post.html' %}
+    {% endfor %}
+{% endblock %}
