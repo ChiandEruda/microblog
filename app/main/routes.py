@@ -43,7 +43,6 @@ def index():
 
 
 @bp.route('/explore')
-@login_required
 def explore():
     page = request.args.get('page', 1, type=int)
     posts = Post.query.order_by(Post.timestamp.desc()).paginate(
@@ -77,13 +76,11 @@ def user(username):
 def edit_profile():
     form = EditProfileForm(current_user.username)
     if form.validate_on_submit():
-        current_user.username = form.username.data
         current_user.about_me = form.about_me.data
         db.session.commit()
         flash('更改已保存.')
         return redirect(url_for('main.edit_profile'))
     elif request.method == 'GET':
-        form.username.data = current_user.username
         form.about_me.data = current_user.about_me
     return render_template('edit_profile.html', title='Edit Profile',
                         form=form)
@@ -129,7 +126,10 @@ def search():
         return render_template('search.html', title='搜索结果', results=results)
     return redirect(url_for('main.index'))
 
-
+@bp.route('/user/<username>/popup')
+def pop_up(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    return render_template('pop_up.html', user=user)
 
 
 
