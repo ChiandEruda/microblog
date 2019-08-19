@@ -131,6 +131,14 @@ def pop_up(username):
     user = User.query.filter_by(username=username).first_or_404()
     return render_template('pop_up.html', user=user)
 
-
+@bp.route('/post/<username>/<int:post_id>/delete')
+@login_required
+def delete_post(username, post_id):
+    user = User.query.filter_by(username=username).first_or_404()
+    if user==current_user and post_id:
+        post = Post.query.filter_by(id=post_id, user_id=current_user.id).first()
+        db.session.delete(post)    
+        db.session.commit()
+    return redirect(url_for('main.user', username=username))
 
 

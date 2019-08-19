@@ -24,6 +24,12 @@
             {{ moment(post.timestamp).fromNow() }}：
             <br>
             {{ post.body }}
+            
+            {% if current_user==post.author %}
+            <div class="col-mde-3 pull-right">
+                <a href="{{ url_for('main.delete_post', post_id=post.id, username=post.author.username) }}">删除</a>
+            </div>
+            {% endif %}
         </td>
     </tr>
 </table>
